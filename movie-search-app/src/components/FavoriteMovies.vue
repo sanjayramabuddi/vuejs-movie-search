@@ -79,7 +79,6 @@ export default {
   width: 100%;
 }
 
-/* Responsive styles (example) */
 @media screen and (max-width: 576px) {
   .favorite-card {
     width: 100%;

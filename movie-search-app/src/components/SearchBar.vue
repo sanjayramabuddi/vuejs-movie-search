@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="search-bar">
-      <input v-model="searchQuery" class="form-control" placeholder="Enter movie name" />
+      <input v-model="searchQuery" @keyup.enter="handleSearch" class="form-control" placeholder="Enter movie name" />
       <button @click="handleSearch" class="btn btn-primary-dark">Search</button>
     </div>
     <div class="movie-list">
@@ -32,42 +32,33 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Search bar styles */
+<style>
+
 .search-bar {
   margin: 20px;
   display: flex;
   justify-content: center;
-  /* Center items horizontally */
   align-items: center;
 }
 
-/* Input styles */
 .form-control {
   width: 50%;
-  /* Adjust the width as needed */
   margin-right: 10px;
   border-radius: 5px;
 }
 
-/* Button styles */
 .btn-primary-dark {
   background-color: #265481;
-  /* Dark background color */
   border-color: #343a40;
-  /* Matching border color */
   color: #ffffff;
-  /* White text color */
   border-radius: 5px;
 }
 
 .btn-primary-dark:hover {
   background-color: #555d66;
-  /* Darker color on hover */
   border-color: #555d66;
 }
 
-/* Responsive styles (example) */
 @media screen and (max-width: 768px) {
   .search-bar {
     flex-direction: column;

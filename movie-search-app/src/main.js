@@ -1,10 +1,10 @@
 import { createApp } from 'vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import App from './App.vue';
-import router from './router';  // Import the router
-import store from './store';   // Import the store
+import router from './router'; 
+import store from './store';   
 
 const app = createApp(App);
-app.use(router);  // Use the router
-app.use(store);   // Use the store
+app.use(router); 
+app.use(store);   
 app.mount('#app');
