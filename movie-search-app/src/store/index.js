@@ -2,15 +2,18 @@ import { createStore } from 'vuex';
 
 const store = createStore({
   state: {
+    // Initial state of the store
     searchResults: [],
     favorites: [],
   },
   mutations: {
     setSearchResults(state, results) {
-      state.searchResults = results;
+      // Only update searchResults if results are provided
+      if (results) {
+        state.searchResults = results;
+      }
     },
     addToFavorites(state, movie) {
-      console.log(movie)
       state.favorites.push(movie);
     },
     removeFromFavorites(state, movie) {
@@ -18,15 +21,23 @@ const store = createStore({
     }
   },
   actions: {
-    async searchMovies({ commit }, query) {
-      try {
-        const response = await fetch(`http://www.omdbapi.com/?s=${query}&apikey=23e44f27`);
-        const data = await response.json();
-        // console.log(data);
-        commit('setSearchResults', data.Search || []);
-        console.log(this.state.searchResults)
-      } catch (error) {
-        console.error('Error fetching data:', error);
+    async searchMovies({ commit, state }, query) {
+      // Only fetch new results if query is provided
+      if (query) {
+        try {
+          const response = await fetch(`http://www.omdbapi.com/?s=${query}&apikey=23e44f27`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          } else {
+            const data = await response.json();
+            commit('setSearchResults', data.Search || []);
+          }
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      } else {
+        // If no query is provided, commit existing searchResults
+        commit('setSearchResults', state.searchResults);
       }
     },
   },

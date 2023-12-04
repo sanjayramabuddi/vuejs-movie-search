@@ -47,7 +47,6 @@ html {
   background-color: #2c3e50;
 }
 
-/* Navigation bar styling */
 .navbar {
   padding: 1rem 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -57,20 +56,16 @@ html {
   font-size: 1.5rem;
   font-weight: bold;
   color: #ffffff;
-  /* White text for dark background */
 }
 
-/* Favorites icon styling */
 .navbar-text i {
   transition: color 0.3s;
 }
 
 .navbar-text:hover i {
   color: #e44d26;
-  /* Change color on hover */
 }
 
-/* Badge styling */
 .badge {
   font-size: 0.8rem;
   width: 20px;

@@ -1,14 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import SearchBar from '@/components/SearchBar.vue';
-import MovieList from '@/components/MovieList.vue';
-import MovieDetails from '@/components/MovieDetails.vue';
-import FavoriteMovies from '@/components/FavoriteMovies.vue';
 
 const routes = [
-  { path: '/', component: SearchBar },
-  { path: '/search', component: MovieList },
-  { path: '/movie/:id', name: 'movie-details', component: MovieDetails },
-  { path: '/favorites', component: FavoriteMovies },
+  { path: '/', component: () => import('@/components/SearchBar.vue') },
+  { path: '/search', component: () => import('@/components/MovieList.vue') },
+  { path: '/movie/:id', name: 'movie-details', component: () => import('@/components/MovieDetails.vue') },
+  { path: '/favorites', component: () => import('@/components/FavoriteMovies.vue') },
 ];
 
 const router = createRouter({

@@ -14,7 +14,7 @@
               <button v-if="!isInFavorites(movie)" @click="addToFavorites(movie)" class="btn btn-primary btn-sm">
                 Add to Favorites
               </button>
-              <p v-else class="text-success small">Added to Favorites</p>
+              <p v-else class="text-success small">Favorites</p>
             </div>
           </div>
         </div>

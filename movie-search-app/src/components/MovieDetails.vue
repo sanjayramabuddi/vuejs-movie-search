@@ -1,5 +1,6 @@
 <template>
-  <div v-if="movieDetails" class="movie-details">
+  <div v-if="loading" class="loading">Loading...</div>
+  <div v-else-if="movieDetails" class="movie-details">
     <div class="card">
       <img :src="movieDetails.Poster" alt="Movie Poster" class="card-img-top img-fluid" />
       <div class="card-body">
@@ -23,16 +24,17 @@ export default {
     return {
       movieDetails: null,
       showFullPlot: false,
+      loading: false,
     };
   },
   computed: {
     truncatedPlot() {
       const plotWords = this.movieDetails.Plot.split(' ');
-      const maxWords = this.showFullPlot ? plotWords.length : 20; // Adjust the number of words to show
+      const maxWords = this.showFullPlot ? plotWords.length : 20;
       return plotWords.slice(0, maxWords).join(' ') + (plotWords.length > maxWords ? ' ...' : '');
     },
     showViewMoreButton() {
-      return this.movieDetails.Plot.split(' ').length > 20; // Adjust the number of words to trigger the "View More" button
+      return this.movieDetails.Plot.split(' ').length > 20;
     },
   },
   methods: {
@@ -44,17 +46,17 @@ export default {
     },
   },
   mounted() {
-    // Fetch detailed information about the movie using the movie ID from the route params
+    this.loading = true;
     const movieId = this.$route.params.id;
-
-    // API call to fetch movie details using the ID
     axios.get(`http://www.omdbapi.com/?i=${movieId}&apikey=23e44f27`)
       .then(response => {
-        // Update the movieDetails data property with the fetched data
         this.movieDetails = response.data;
       })
       .catch(error => {
         console.error('Error fetching movie details:', error);
+      })
+      .finally(() => {
+        this.loading = false;
       });
   },
 };
@@ -98,5 +100,9 @@ export default {
   color: #007bff;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.loading {
+  color: #fff;
 }
 </style>

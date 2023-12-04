@@ -5,7 +5,7 @@
       <button @click="handleSearch" class="btn btn-primary-dark">Search</button>
     </div>
     <div class="movie-list">
-      <component :is="showMovieList ? 'MovieList' : 'div'"></component>
+      <MovieList v-if="showMovieList"></MovieList>
     </div>
   </div>
 </template>
